@@ -1,20 +1,20 @@
 var selectors = []
 var videoElements = []
-
+var i = 0
 	function videoError(e) {
 		// do something
 	}
 	function start() {
 		var arrayLength = selectors.length;
-		for (var i = 0; i < arrayLength; i++)		{
+		for (i = 0; i < arrayLength; i++)		{
 			var videoSource = selectors[i].value;
 			var constraints = {
 				video: {deviceId: videoSource ? {exact: videoSource} : undefined}
 			};
-			navigator.getUserMedia(constraints, function(stream, i) {
+			navigator.getUserMedia(constraints, function(stream) {
 				//I am here, i need to pass i in instead of 0
 				console.log(i)
-				videoElements[0].src = window.URL.createObjectURL(stream);
+				videoElements[i-1].src = window.URL.createObjectURL(stream);
 			}
 			, videoError)
 			
