@@ -3,6 +3,7 @@
 <head>
 <link rel="stylesheet" href="accordion.css">
 <link rel="stylesheet" href="enumerator.css">
+<link rel="icon" href="favicon.ico" type="image/png" sizes="32x32">
 <style>
 	
 	
@@ -22,24 +23,12 @@
 			</ul>		
 		</div>
 		<div id="main">
-			<button class="accordion">Section 1</button>
-			<div class="panel" id="panel1">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-			<button class="accordion">Section 2</button>
-			<div class="panel" id="panel2">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
-
-			<button class="accordion">Section 3</button>
-			<div class="panel"  id="panel3">
-			  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-			</div>
+			<!--this is where all the generated HTML goes -->
 		</div>
 	</div>
 </body>
 
+<script src="dataObjs.js"></script>
 <script src="accordion.js"></script>
 <script src="enumerator.js"></script>
 
@@ -54,8 +43,8 @@
 		label = "Webcam #" + noOfCams;
 		id = "viewport" + noOfCams;
 		addAccordionSegment(mainDomElement, label, id);
-		viewportDom = document.querySelector("#"+id);
-		createVideoWindow(viewportDom,noOfCams);
+		//viewportDom = document.querySelector("#"+id);
+		createViewport(id, label);
 	
 		setupAccordion ()
 	}
