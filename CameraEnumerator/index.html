@@ -41,11 +41,15 @@
 	document.querySelector("#addWebcam").onclick =  function() {
 		noOfCams++;
 		label = "Webcam #" + noOfCams;
-		id = "viewport" + noOfCams;
-		addAccordionSegment(mainDomElement, label, id);
+		panelId = "viewport" + noOfCams;
+		addAccordionSegment(mainDomElement, label, panelId);
 		//viewportDom = document.querySelector("#"+id);
-		createViewport(id, label);
-	
+		createViewport(panelId, label);
+		
+		//expand panel
+		panelElement = document.querySelector('#' + panelId);
+		panelElement.style.maxHeight = panelElement.scrollHeight + "px";
+		
 		setupAccordion ()
 	}
 </script>

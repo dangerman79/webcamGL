@@ -23,8 +23,7 @@ function addAccordionSegment(parentElement, label, id)
 	newHTML = newHTML + '<div class="panel" id="' + id + '">'
 	newHTML = newHTML + '</div>'
 	parentElement.innerHTML = newHTML + currentHTML
-	
-	
+
 	
 	
 	//setupAccordion ()
