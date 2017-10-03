@@ -1,15 +1,24 @@
-var viewports = []
 
-function camera ()
+function updateWidgetLabel(widget, event)
 {
+	widget.data.label = event.target.value;
+}
+
+
+function webcam ()
+{
+
 	this.data = {
 		"type": "Camera",
+		"label": "",
+		"selectedDeviceId": ""
+		
+		/*
 		"viewportId" : "",
 		"parentDomId": "",
-		"label": "",
 		"selectorDomId": "",
-		"selectedDeviceId": "",
 		"videoWinDomId": ""
-		
-	}	
+		*/
+	}
+	
 }

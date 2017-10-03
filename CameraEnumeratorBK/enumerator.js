@@ -24,7 +24,7 @@ var i = 0
 				document.querySelector('#' + viewports[x].data.videoWinDomId).src = window.URL.createObjectURL(stream);
 	}
 	
-	/*function createViewport(parentDomId, label)
+	function createViewport(parentDomId, label)
 	{
 		var viewport = new camera();
 		viewport.data.parentDomId = parentDomId;
@@ -33,7 +33,7 @@ var i = 0
 		viewports.push(viewport);
 		createCam (viewports[viewport.data.viewportId]);
 		
-	}*/
+	}
 	
 	function createCam (viewport)
 	{
@@ -46,7 +46,7 @@ var i = 0
 		webcamHTML = "<div class='select'>";
 		webcamHTML = webcamHTML + "<label for='videoSource'>Video source: </label><select id='"+viewport.data.selectorDomId+"'></select>";
 		webcamHTML = webcamHTML + "</div>"
-		webcamHTML = webcamHTML + "<video autoplay='true' class='videoWindow' id='"+viewport.data.videoWinDomId+"' controls/>"
+		webcamHTML = webcamHTML + "<video autoplay='true' class='videoWindow' id='"+viewport.data.videoWinDomId+"'/>"
 		parentElement.innerHTML = webcamHTML
 		videoSelect  = document.querySelector('select#' + viewport.data.selectorDomId);
 		

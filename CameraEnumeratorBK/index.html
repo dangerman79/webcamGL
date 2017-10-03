@@ -33,14 +33,27 @@
 <script src="dataObjs.js"></script>
 <script src="accordion.js"></script>
 <script src="enumerator.js"></script>
-<script src="webcamWidget.js"></script>
+
 
 <script>
-	
-	var noOfWidgets = 0;
+	var noOfCams = 0;
+
 	
 	mainDomElement = document.querySelector("#main");
-	document.querySelector("#addWebcam").onclick = function(){createWebcamWidget();}
+	document.querySelector("#addWebcam").onclick =  function() {
+		noOfCams++;
+		label = "Webcam #" + noOfCams;
+		panelId = "viewport" + noOfCams;
+		addAccordionSegment(mainDomElement, label, panelId);
+		//viewportDom = document.querySelector("#"+id);
+		createViewport(panelId, label);
+		
+		//expand panel
+		panelElement = document.querySelector('#' + panelId);
+		panelElement.style.maxHeight = panelElement.scrollHeight + "px";
+		
+		setupAccordion ()
+	}
 	
 	function saveSettings ()
 	{
