@@ -1,7 +1,8 @@
 var selectors = [];
 var i = 0
 	function videoError(e) {
-		// do something
+		console.log('a Video Error Occured:');
+		console.log(e);
 	}
 
 	function start() {
