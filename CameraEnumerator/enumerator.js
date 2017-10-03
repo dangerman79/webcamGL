@@ -144,4 +144,23 @@ var i = 0
 		console.log('navigator.getUserMedia error: ', error);
 	}
 
+	function createSaveData(projName)
+	{
+		var outputJson = {
+			"projectName": projName,
+			"settings": []		
+			}
+		for (ii = 0; ii !== viewports.length; ++ii) {
+			outputJson.settings.push(viewports[ii].data)
+		}
+		return outputJson
+		
+	}
+	
+	function importLoadData(dataStr)
+	{
+		var dataJson = JSON.parse(dataStr)
+		var x=x
+		var x=x
+	}
 navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(handleError);
