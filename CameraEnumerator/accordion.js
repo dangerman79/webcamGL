@@ -7,7 +7,7 @@ function setupAccordion ()
 
 	for (i = 0; i < acc.length; i++) {
 	  acc[i].onclick = function() {
-		this.classList.toggle("active");
+		//this.classList.toggle("active");
 		var panel = this.nextElementSibling;
 		if (panel.style.maxHeight){
 		  panel.style.maxHeight = null;
@@ -22,32 +22,48 @@ function addWidgetAccordionSegment(widget)
 {
 	noOfWigets++
 	panelId = "widgetPanel" + noOfWigets;
-	domObjs = addAccordionSegment(mainDomElement, widget.data.label, panelId);
-	widget.panelDom = domObjs.panelDom;
-	widget.labelDom = domObjs.labelDom;
+	addAccordionSegment(mainDomElement, widget, panelId);
 
-	widget.labelDom.addEventListener("change", updateWidgetLabel.bind(this, widget));
 }
 
-function expandWidget(widget)
+function expandWidget(widget, value)
 {
-		widget.panelDom.style.maxHeight = widget.panelDom.scrollHeight + "px";
+		widget.data.expanded = value
+		
+		if (widget.data.expanded == true)
+		{
+			widget.panelDom.style.maxHeight = widget.panelDom.scrollHeight + "px";
+		}else{
+			widget.panelDom.maxHeight = null;
+		}
 }
 
 
-function addAccordionSegment(parentElement, label, id)
+
+
+function addAccordionSegment(parentElement, widget, id)
 {
-	currentHTML = parentElement.innerHTML
-	labelId = id+"Label"
-	newHTML = '<button class="accordion"><input class="accordionLabel" type="text" id="' + labelId + '" value="' + label + '"></button>'
-	newHTML = newHTML + '<div class="panel" id="' + id + '">'
-	newHTML = newHTML + '</div>'
-	parentElement.innerHTML = newHTML + currentHTML
 	
-	var retObj = {}
-	retObj.panelDom = document.querySelector('#' + id)
-	retObj.labelDom = document.querySelector('#' + labelId)
+	var labelId = id+"Label"
+	newButton = document.createElement('button');
+	newButton.className  = "accordion";
+	parentElement.appendChild(newButton);
 	
-	return retObj
+	newInput = document.createElement('input');
+	newInput.className  = "accordionLabel";
+	newInput.type = "text";
+	newInput.id = labelId;
+	newInput.value = widget.data.label;
+	newInput.addEventListener('change', updateWidgetLabel.bind(event, widget), false);
+	newButton.appendChild(newInput);
+	
+	newDiv = document.createElement('div');
+	newDiv.className ="panel"
+	newDiv.id = id;
+	parentElement.appendChild(newDiv);
+	
+	widget.panelDom = newDiv;
+	widget.labelDom = newInput;
+	
 	//setupAccordion ()
 }

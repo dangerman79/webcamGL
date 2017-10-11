@@ -19,9 +19,9 @@
 			Project name: <input type="text" id="projName" value="New Project"><br>
 			<ul>
 			  <button id="addWebcam" type="button" >Add Webcam</button>
-			  <button id="saveSettings" type="button" onclick="saveSettings();">Save Settings</button>
+			  <button id="saveSettings" type="button" onclick="saveSettingsClick();">Save Settings</button>
 			  <input id="fileInput" type="file" name="files[]" style="display:none;" multiple />
-			  <button id="loadSettings" type="button" onclick="loadSettings();">Load Settings</button>
+			  <button id="loadSettings" type="button" onclick="loadSettingsClick();">Load Settings</button>
 			</ul>		
 		</div>
 		<div id="main">
@@ -29,71 +29,36 @@
 		</div>
 	</div>
 </body>
-
+<script src="generalFunctions.js"></script>
 <script src="dataObjs.js"></script>
 <script src="accordion.js"></script>
-<script src="enumerator.js"></script>
+<script src="fileIO.js"></script>
 <script src="webcamWidget.js"></script>
 
 <script>
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
 	
-	var noOfWidgets = 0;
 	
 	mainDomElement = document.querySelector("#main");
 	document.querySelector("#addWebcam").onclick = function(){createWebcamWidget();}
 	
-	function saveSettings ()
+	function saveSettingsClick ()
 	{
 		var projName = document.querySelector("#projName").value
-		var obj = createSaveData(projName);
-		var json = JSON.stringify(obj);
-		var blob = new Blob([json], {type: "application/json"});
-		var myURL = window.URL || window.webkitURL
-		var url  = myURL.createObjectURL(blob);
-		
-		
-		var a = document.createElement("a");
-        a.download = projName + '.json';
-		a.href = url;
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(function() {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);  
-        }, 0); 
+		saveSettingsToFile();
+
 	}
 	
-
-	function loadSettings()
+	function loadSettingsClick()
 	{
 		
 		fileInputDlg = document.getElementById('fileInput');
 		fileInputDlg.click();
-	    //var rawFile = new XMLHttpRequest();
-
 	}
+	document.getElementById('fileInput').addEventListener('change', loadSettingsFile, false);
 	
-	function loadSettings2(evt)
-	{
-		var files = evt.target.files;
-		fileInputDlg = document.getElementById('fileInput');
-		var reader = new FileReader();
-		reader.onload = (function(theFile) {
-			console.log (theFile.target.result);
-			importLoadData (theFile.target.result);
-		})
-		reader.readAsText(files[0]);
-	}
-	document.getElementById('fileInput').addEventListener('change', loadSettings2, false);
 
 </script>
 
-
-<script>
-	// ar vidwin = new videoWindow
-	//parent =  document.querySelector("#panel1");
-	//createVideoWindow(parent, 1)
-	
-</script>
 
 </html>

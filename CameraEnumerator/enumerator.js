@@ -164,4 +164,4 @@ var i = 0
 		var x=x
 		var x=x
 	}
-navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(handleError);
+//navigator.mediaDevices.enumerateDevices().then(gotDevices).catch(handleError);

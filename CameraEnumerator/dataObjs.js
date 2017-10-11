@@ -1,17 +1,20 @@
-
-function updateWidgetLabel(widget, event)
-{
-	widget.data.label = event.target.value;
-}
+var widgets = [];
 
 
 function webcam ()
 {
-
+	this.panelDom = {}
+	this.labelDom = {}
+	this.vidwinDom = {}
+	this.sourceSelectors = []
+	
 	this.data = {
-		"type": "Camera",
+		"type": "webcam",
 		"label": "",
-		"selectedDeviceId": ""
+		"widgetId": "widget-" + guid(),
+		"selectedDeviceId": "",
+		
+		//"expanded": "" // i maybe able to use if (labelDom.style.maxHeight != null) for the save load
 		
 		/*
 		"viewportId" : "",
@@ -20,5 +23,22 @@ function webcam ()
 		"videoWinDomId": ""
 		*/
 	}
+}
+
+function updateWidgetLabel(widget, event)
+{
+	widget.data.label = event.target.value;
+	populateSourceSelectors();
+}
+function getWidgetById (id)
+{
+	for (var x=0; x < widgets.length; x++) 
+	{
+		if (widgets[x].data.widgetId==id)
+		{
+			return widgets[x];
+		}
+	}
 	
+	return null
 }
