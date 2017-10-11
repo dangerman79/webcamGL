@@ -1,11 +1,13 @@
 var widgets = [];
-
+var projectName = "";
 
 function webcam ()
-{
+{	
+	this.accordionDom = {}
 	this.panelDom = {}
 	this.labelDom = {}
 	this.vidwinDom = {}
+	
 	this.sourceSelectors = []
 	
 	this.data = {
@@ -27,6 +29,7 @@ function webcam ()
 
 function updateWidgetLabel(widget, event)
 {
+	
 	widget.data.label = event.target.value;
 	populateSourceSelectors();
 }

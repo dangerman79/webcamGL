@@ -46,7 +46,34 @@ function loadSettingsFile(evt)
 
 function importLoadData(dataStr)
 {
-	var dataJson = JSON.parse(dataStr)
-	var x=x
-	var x=x
+	var dataJson = JSON.parse(dataStr);
+	projectName = dataJson.projectName;
+	document.querySelector("#projName").value = dataJson.projectName;
+	dataJson.settings.forEach (function(data) 
+	{
+		switch (data.type){
+			case "webcam":
+				var widget = new webcam();
+				widgets.push(widget);
+				noOfCams++;
+				widget.data = data;
+				addWidgetAccordionSegment(widget);
+				addWebcamPanel(widget);
+
+				break; 
+				
+			default:
+				console.log ("widget type '" + data.type + "' not supported!");
+				alert ("widget type '" + data.type + "' not supported!");
+		}
+	})
+	
+	setupAccordion ();
+	
+	for (var x = 0; x < 10; x++)
+	{
+		populateSourceSelectors();
+	}
+
+	
 }

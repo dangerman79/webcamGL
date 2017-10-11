@@ -17,12 +17,6 @@ function createWebcamWidget()
 		addWidgetAccordionSegment(widget);
 		addWebcamPanel(widget)
 		
-		
-		// I AM HERE
-		
-		//createCam (viewports[widget.data.viewportId]);
-
-		
 		setupAccordion ()
 		
 		expandWidget (widget, true)
@@ -63,6 +57,22 @@ function addWebcamPanel(widget)
 		
 }
 
+function deleteWidget (widget, event)
+{
+	event.stopPropagation();
+	var r = confirm("Are you sure you want to delete " + widget.data.label);
+	if (r == true) {
+		widget.accordionDom.parentNode.removeChild(widget.accordionDom);
+		widget.panelDom.parentNode.removeChild(widget.panelDom);
+	}
+	index = widgets.indexOf(widget);
+	if (index > -1) {
+		widgets.splice(index, 1);
+	}
+	
+}
+
+
 function webCamInputChange(widget, event)
 {
 	//console.log(widget)
@@ -71,24 +81,54 @@ function webCamInputChange(widget, event)
 	var newSrcStr = event.target.value;
 	widget.data.selectedDeviceId = newSrcStr;
 	
-	if (newSrcStr.substring(0,6)=='widget')
-	{
-		//console.log('widget')
-		selectedWidget = getWidgetById (newSrcStr)
-		widget.vidwinDom.src = selectedWidget.vidwinDom.src
-		
-	}else{
-		//console.log('cam')
-		var constraints = {
-			video: {deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
-		  };
-		navigator.getUserMedia(constraints, handleVideo.bind(null ,widget), videoError)
-	}
+	checkAllSelectors()
+
 	
+}
+
+function checkAllSelectors()
+{
+	widgets.forEach (function(widget) 
+	{
+		widget.sourceSelectors.forEach (function(selector)
+		{
+			newSrcStr = selector.value;
+			if (newSrcStr.substring(0,6)=='widget')
+			{
+				//console.log('widget')
+				selectedWidget = getWidgetById (newSrcStr)
+				widget.vidwinDom.src = selectedWidget.vidwinDom.src
+				
+			}else{
+				//console.log('cam')
+				var constraints = {
+					video: {deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
+				  };
+				navigator.getUserMedia(constraints, handleVideo.bind(null ,widget), videoError)
+			}
+		})
+	})
+	
+}
+
+function checkWidgetsSelectingOtherWidgets ()
+{
+	widgets.forEach (function(widget) 
+	{
+		widgets.forEach (function(widget2) 
+		{
+			if (widget2.data.selectedDeviceId == widget.data.widgetId)
+			{
+				widget2.vidwinDom.src = widget.vidwinDom.src
+				
+			}
+		})
+	})
 }
 
 function handleVideo(widget, stream) {
 	widget.vidwinDom.src = window.URL.createObjectURL(stream);
+	checkWidgetsSelectingOtherWidgets();
 }
 
 function videoError(e) {
@@ -141,7 +181,7 @@ function populateSourceSelectors()
 		})
 		
 	})
-	
+	checkAllSelectors()
 }
 
 function getCameras(deviceInfos)

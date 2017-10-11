@@ -24,22 +24,6 @@ button.accordion {
 	background-color: transparent;
 }
 
-button.accordion.active, button.accordion:hover {
-    background-color: #ddd;
-}
-
-button.accordion:after {
-    content: '\002B';
-    color: #777;
-    font-weight: bold;
-    float: right;
-    margin-left: 5px;
-}
-
-button.accordion.active:after {
-    content: "\2212";
-}
-
 div.panel {
     padding: 0 18px;
     background-color: white;

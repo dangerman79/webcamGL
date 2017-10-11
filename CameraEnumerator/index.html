@@ -45,7 +45,8 @@
 	function saveSettingsClick ()
 	{
 		var projName = document.querySelector("#projName").value
-		saveSettingsToFile();
+		projectName = projName;
+		saveSettingsToFile(projName);
 
 	}
 	

@@ -55,7 +55,18 @@ function addAccordionSegment(parentElement, widget, id)
 	newInput.id = labelId;
 	newInput.value = widget.data.label;
 	newInput.addEventListener('change', updateWidgetLabel.bind(event, widget), false);
+	newInput.addEventListener('keyup', keyupWidgetLabel) 
+	newInput.addEventListener('click', function(event){event.stopPropagation()})
+	
+	newCloseButton = document.createElement('div');
+	newCloseButton.className  = "closeButton";
+	newCloseButton.innerHTML = 'X'
+	newCloseButton.style.color = '#932626';
+	newCloseButton.style.cssFloat = "right";
+	newCloseButton.addEventListener("click", deleteWidget.bind(event, widget))
+	
 	newButton.appendChild(newInput);
+	newButton.appendChild(newCloseButton);
 	
 	newDiv = document.createElement('div');
 	newDiv.className ="panel"
@@ -64,6 +75,14 @@ function addAccordionSegment(parentElement, widget, id)
 	
 	widget.panelDom = newDiv;
 	widget.labelDom = newInput;
-	
+	widget.accordionDom =  newButton;
 	//setupAccordion ()
+}
+function keyupWidgetLabel(event)
+{
+	event.stopPropagation();
+	if (event.keyCode === 13) {
+		this.blur()
+       //event.target.
+    }
 }
