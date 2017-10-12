@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+	<body>
+		<div id="main">
+			<!--this is where all the generated HTML goes -->
+		</div>
+	</body>
+	
+	<script>
+		mainDomElement = document.querySelector("#main");
+		var labelDoms = []
+		var count = 0;
+		for (let count = 0; count < 4; count++)
+		{
+			/*var labelId = 'Label' + count;
+			newHTML = '<input class="accordionLabel" type="text" id="' + labelId + '" value="' + labelId + '"/>'
+			currentHTML = mainDomElement.innerHTML
+			mainDomElement.innerHTML = newHTML + currentHTML
+			
+			labelDoms.push(document.querySelector('#' + labelId));
+			//labelDomObj.addEventListener("change", updateLabel);
+			labelDoms[count].onchange = function(event){updateLabel(event)}/*/
+			
+			var labelId = 'Label' + count,
+			newHTML = document.createElement('input');
+
+			 newHTML.type = 'text';
+			 newHTML.value = labelId;
+			 newHTML.id = labelId;
+			 newHTML.addEventListener('change', updateLabel, false);
+			 mainDomElement.appendChild(newHTML);
+		}
+		
+		function updateLabel(event)
+		{
+			alert(event.target.value);
+		}
+	</script>
+</html>

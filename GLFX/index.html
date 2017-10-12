@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="accordion.css">
+<link rel="stylesheet" href="GLFX.css">
+<link rel="icon" href="favicon.ico" type="image/png" sizes="32x32">
+<style>
+	
+	
+</style>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h2>GLFX</h2>
+			<p>Video FX, in your Browser</p>
+		</header>
+		<div id="controls">
+			Project name: <input type="text" id="projName" value="New Project"><br>
+			<ul>
+			  <button id="addWebcam" type="button" >Add Webcam</button>
+			  <button id="addChromaFilter" type = 'button'>Chroma Filter</button>
+			  <button id="saveSettings" type="button" onclick="saveSettingsClick();">Save Settings</button>
+			  <input id="fileInput" type="file" name="files[]" style="display:none;" multiple />
+			  <button id="loadSettings" type="button" onclick="loadSettingsClick();">Load Settings</button>
+			</ul>		
+		</div>
+		<div id="main">
+			<!--this is where all the generated HTML goes -->
+		</div>
+	</div>
+</body>
+<script src="generalFunctions.js"></script>
+<script src="dataObjs.js"></script>
+<script src="accordion.js"></script>
+<script src="fileIO.js"></script>
+<script src="widgets.js"></script>
+
+<script>
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+	
+	
+	mainDomElement = document.querySelector("#main");
+	document.querySelector("#addWebcam").onclick = function(){createWidget('webcam');}
+	document.querySelector("#addChromaFilter").onclick = function(){createWidget('chromaFilter');}
+	
+	function saveSettingsClick ()
+	{
+		var projName = document.querySelector("#projName").value
+		projectName = projName;
+		saveSettingsToFile(projName);
+
+	}
+	
+	function loadSettingsClick()
+	{
+		
+		fileInputDlg = document.getElementById('fileInput');
+		fileInputDlg.click();
+	}
+	document.getElementById('fileInput').addEventListener('change', loadSettingsFile, false);
+	
+
+</script>
+
+
+</html>
