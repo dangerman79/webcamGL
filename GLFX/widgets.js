@@ -1,5 +1,6 @@
 var noOfCams = 0;
 var noOfChromaFilters = 0;
+var noOfStaccatoFilters = 0;
 var webcams = [];
 var gotCameras = false;
 
@@ -58,6 +59,19 @@ function createWidget(type)
 					this.vidwinDom.src = src
 				}
 			break;
+			case 'staccatoFilter':
+				noOfStaccatoFilters++;
+				label = "StaccatoFilter #" + noOfStaccatoFilters;
+				widget.data.label = label;
+				addWidgetAccordionSegment(widget);
+				addStaccatoControls(widget);
+				addCanvas(widget);
+				addBaseListener(widget);
+				widget.updateSource = function(src){
+					this.vidwinDom.src = src // change this to get the data from the canvas.
+				}
+				
+			break;
 			
 		
 		}	
@@ -78,6 +92,30 @@ function addCanvasListener (widget)
 {
 	widget.canvasDom.addEventListener("click", addSamplePx.bind(event, widget));
 	
+}
+function addStaccatoControls(widget)
+{
+	addBasePanel(widget)
+	controlsDiv = widget.controlsDivDom
+	newLabel = document.createElement('label');
+	newLabel.innerHTML = 'Frames Per Strobe:';
+	controlsDiv.appendChild(newLabel);
+	
+	framesPerStrobe = document.createElement('input');
+	framesPerStrobe.type = "text"
+	framesPerStrobe.value = 30;
+	controlsDiv.appendChild(framesPerStrobe);
+	widget.framesPerStrobeDom = framesPerStrobe;
+	
+	framesPerStrobe.addEventListener("change", staccatoSettingsChange.bind(event, widget));
+}	
+	
+function staccatoSettingsChange(widget, event)
+{
+	fps = widget.toleranceDom.value
+	if(isNumeric(fps)){
+		widget.data.framesPerStrobe = Number(fps);
+	}
 }
 
 function addChromaControls(widget)
