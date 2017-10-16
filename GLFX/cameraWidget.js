@@ -44,30 +44,37 @@ function CreateCameraWidgetObj ()
 		
 		navigator.mediaDevices.enumerateDevices().then(getCameras).catch(mediaDeviceError);
 	
-			var draw = function (widget) {
-				// schedule next call to this function
-				if (widget.data.isActive != false )requestAnimationFrame(draw.bind(event, widget));
+		var draw = function (widget) {
+			// schedule next call to this function
+			if (widget.data.isActive != false )requestAnimationFrame(draw.bind(event, widget));
 
-				width = widget.vidwinDom.videoWidth;
-				height = widget.vidwinDom.videoHeight;
-				
-				widget.canvasDom.width = width;
-				widget.canvasDom.height = height;
-				// draw video data into the canvas
-				
-				context = widget.canvasDom.getContext('2d');
-				context.drawImage(widget.vidwinDom, 0, 0, width, height);
-				
-
-			};
+			width = widget.vidwinDom.videoWidth;
+			height = widget.vidwinDom.videoHeight;
 			
-			requestAnimationFrame(draw.bind(event, widget));
+			widget.canvasDom.width = width;
+			widget.canvasDom.height = height;
+			// draw video data into the canvas
+			
+			context = widget.canvasDom.getContext('2d');
+			context.drawImage(widget.vidwinDom, 0, 0, width, height);
+			
+
+		};
+		
+		requestAnimationFrame(draw.bind(event, widget));
 	}
 	
 	returnObj.updateSource = function (src) {
 		this.vidwinDom.src = src
 	}
 	
+	returnObj.changeMethod = function (widget) {
+		newSrcStr = widget.data.selectedDeviceId
+		var constraints = {
+			video: {deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
+		};
+		navigator.getUserMedia(constraints, handleVideo.bind(null ,widget), videoError)
+	}
 	return returnObj;
 }
 
@@ -75,11 +82,7 @@ function webCamInputChange(widget, event)
 {
 	var newSrcStr = event.target.value;
 	widget.data.selectedDeviceId = newSrcStr;
-	var constraints = {
-		video: {deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
-	};
-	navigator.getUserMedia(constraints, handleVideo.bind(null ,widget), videoError)
-	//checkAllSelectors()
+	widget.changeMethod(widget)
 }
 
 function handleVideo(widget, stream) {

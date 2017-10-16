@@ -42,6 +42,11 @@ function WidgetObj ()
 		widget.data.label = event.target.value;
 		populateWidgetSelectors();
 	}
+	
+	this.changeMethod = function (widget)
+	{
+		alert(widget.data.type + ' changeMethod not yet defined!')
+	}
 }
 
 function Point(x, y){

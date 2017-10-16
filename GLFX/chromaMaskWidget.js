@@ -88,7 +88,17 @@ function CreateChromaMaskWidgetObj ()
 
 		requestAnimationFrame(draw.bind(event, widget));
 	}
-	
+	newWidget.changeMethod = function (widget) {
+		widget.sourceWidget = getWidgetById (widget.data.selectedDeviceId)
+		widget.data.showSamplePx = widget.samplePxDom.checked;
+		widget.data.liveSampling = widget.liveSampleDom.checked
+		tol = widget.toleranceDom.value
+		if(isNumeric(tol)){
+			widget.data.tolerance = Number(widget.toleranceDom.value);
+		}
+		setChromaRangeFromSamples(widget);
+		
+	}
 	return newWidget;
 }
 
@@ -114,7 +124,7 @@ function applyChromaMask(widget)
 	
 	if (widget.data.liveSampling == true) 
 	{
-		setChromaRangeFromSamples(widget, width, height, inputImData)
+		setChromaRangeFromSamples(widget)
 	}
 	  // modify pixels applying a simple effect
 	  for (var i = 0; i < inputImData.length; i+=4) {
@@ -168,13 +178,24 @@ function applyChromaMask(widget)
 	writeContext.putImageData(imageDataOut, 0, 0);
 }
 
-function setChromaRangeFromSamples(widget, width, height, data)
+function setChromaRangeFromSamples(widget)
 {
+	readContext = widget.sourceWidget.canvasDom.getContext('2d')
+
+	width = widget.sourceWidget.canvasDom.width;
+	height = widget.sourceWidget.canvasDom.height;
+
+	
+	// read pixels
+	var imageDataIn = readContext.getImageData(0, 0, width, height);
+	inputImData = imageDataIn.data; // data is an array of pixels in RGBA
+	
+	
 	colLo = new Col(255,255,255,0);
 	colHi = new Col(0,0,0,0);
 	widget.data.samplePx.forEach (function(px) 
 	{
-		sampleCol = getCol(px.x, px.y, width, height, data)
+		sampleCol = getCol(px.x, px.y, width, height, inputImData)
 		if (sampleCol.r > colHi.r) {colHi.r = sampleCol.r}
 		if (sampleCol.g > colHi.g) {colHi.g = sampleCol.g}
 		if (sampleCol.b > colHi.b) {colHi.b = sampleCol.b}
@@ -201,25 +222,24 @@ function chromaInputChange(widget, event)
 {
 	var newSrcStr = event.target.value;
 	widget.data.selectedDeviceId = newSrcStr;
-	widget.sourceWidget = getWidgetById (newSrcStr)
+	widget.changeMethod(widget)
 }
 
+	
 function chromaSettingsChange(widget, event)
 {
-	widget.data.showSamplePx = widget.samplePxDom.checked;
-	widget.data.liveSampling = widget.liveSampleDom.checked
-	tol = widget.toleranceDom.value
-	if(isNumeric(tol)){
-		widget.data.tolerance = Number(widget.toleranceDom.value);
-	}
+	widget.changeMethod(widget)
 }
 
 function addSamplePx(widget, event)
 {
 	var px= new Point(event.offsetX, event.offsetY);
 	widget.data.samplePx.push(px);
+	
+	setChromaRangeFromSamples(widget)
 }
 function clearSamplePx(widget, event)
 {
 	widget.data.samplePx = [];
+	setChromaRangeFromSamples(widget)
 }

@@ -13,6 +13,7 @@
 <script src="widgets.js"></script>
 <script src="cameraWidget.js"></script>
 <script src="chromaMaskWidget.js"></script>
+<script src="videoOutWidget.js"></script>
 
 </head>
 <body>
@@ -33,6 +34,7 @@
 			  <button id="addWebcam" type="button" >Camera</button>
 			  <button id="addChromaFilter" type = 'button'>Chroma Mask</button>
 			  <button id="addStaccatoFilter" type = 'button'>Staccato Filter</button>
+			  <button id="addVideoOutput" type = 'button'>Video Output</button>
 			</ul>		
 		</div>
 		<div id="main">
@@ -50,6 +52,9 @@
 	document.querySelector("#addWebcam").onclick = function(){createWidget('webcam');}
 	document.querySelector("#addChromaFilter").onclick = function(){createWidget('chromaMask');}
 	document.querySelector("#addStaccatoFilter").onclick = function(){createWidget('staccatoFilter');}
+	document.querySelector("#addVideoOutput").onclick = function(){createWidget('videoOutput');}
+	
+	
 	function saveSettingsClick ()
 	{
 		var projName = document.querySelector("#projName").value

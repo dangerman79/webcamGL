@@ -15,27 +15,33 @@ function createWidget(type)
 			case 'staccatoFilter':
 				
 			break;
+			case 'videoOutput':
+				var widget = CreateVideoOutputWidgetObj ();
 			
-		
+			break;
 		}	
 		widgets.push(widget);
 		
-		createWidgetDom(widget);
+		if (isLoading != true) {createWidgetDom(widget);}
 		
 		//setupAccordion ()
 		
 		//expandWidget (widget, true)//needs work?
 		
 		
-		populateWidgetSelectors();
-		checkWidgetsExpanded();
+		return widget;
 }
+
+
 
 function createWidgetDom(widget)
 {
 	addAccordionSegment(mainDomElement, widget);
 	addControlsDiv(widget);
 	widget.buildDomElement(widget);
+	
+	populateWidgetSelectors();
+	checkWidgetsExpanded();
 }
 
 function addControlsDiv(widget)
