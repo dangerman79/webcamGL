@@ -70,10 +70,10 @@ function importLoadData(dataStr)
 	
 	setupAccordion ();
 	
-	for (var x = 0; x < 10; x++)
+	/*for (var x = 0; x < 10; x++)
 	{
-		populateSourceSelectors();
-	}
+		populatewidgetSelectors();
+	}*/
 
 	
 }

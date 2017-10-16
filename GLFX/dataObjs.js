@@ -1,6 +1,48 @@
 var widgets = [];
 var projectName = "";
 
+function WidgetObj ()
+{	
+	//accessable dom objs
+	this.accordionDom = {}
+	this.panelDom = {}
+	this.labelDom = {}
+	this.controlsDivDom = {}
+	this.canvasDom = {}
+	this.widgetSelectors = []
+	this.camSelectors = []
+	
+	this.sourceWidget = {}
+	
+	//save data
+	this.data = {
+		"type": "",
+		"label": "",
+		"widgetId": "widget-" + guid(),
+		"selectedDeviceId": "", //change to array?
+		"isActive": "true",
+	}
+	
+	//methods
+	this.buildDomElement = function (widget) 
+	{
+		newLabel = document.createElement('label');
+		newLabel.innerHTML = widget.data.type + ' buildDomElement not yet defined!';
+		widget.controlsDivDom.appendChild(newLabel);
+	}
+	
+	this.updateSource = function (src) 
+	{
+		alert('updateSource not yet defined!')
+	}
+	
+	this.updateLabel = function (widget, event)
+	{
+		widget.data.label = event.target.value;
+		populateWidgetSelectors();
+	}
+}
+
 function Point(x, y){
 	this.x = x || 0;
 	this.y = y || 0;
@@ -14,31 +56,6 @@ function Col(r, g, b, a)
 	this.a = a || 0;
 }
 
-function WidgetObj ()
-{	
-	this.accordionDom = {}
-	this.panelDom = {}
-	this.labelDom = {}
-	this.vidwinDom = {}
-	this.canvasDom = {}
-	this.controlsDivDom = {}
-	
-	this.sourceSelectors = []
-	
-	this.data = {
-		"type": "webcam",
-		"label": "",
-		"widgetId": "widget-" + guid(),
-		"selectedDeviceId": "", //change to array
-	}
-}
-
-function updateWidgetLabel(widget, event)
-{
-	
-	widget.data.label = event.target.value;
-	populateSourceSelectors();
-}
 function getWidgetById (id)
 {
 	for (var x=0; x < widgets.length; x++) 

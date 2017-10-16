@@ -4,10 +4,16 @@
 <link rel="stylesheet" href="accordion.css">
 <link rel="stylesheet" href="GLFX.css">
 <link rel="icon" href="favicon.ico" type="image/png" sizes="32x32">
-<style>
-	
-	
-</style>
+
+
+<script src="generalFunctions.js"></script>
+<script src="dataObjs.js"></script>
+<script src="accordion.js"></script>
+<script src="fileIO.js"></script>
+<script src="widgets.js"></script>
+<script src="cameraWidget.js"></script>
+<script src="chromaMaskWidget.js"></script>
+
 </head>
 <body>
 	<div class="container">
@@ -18,12 +24,15 @@
 		<div id="controls">
 			Project name: <input type="text" id="projName" value="New Project"><br>
 			<ul>
-			  <button id="addWebcam" type="button" >Add Webcam</button>
-			  <button id="addChromaFilter" type = 'button'>Chroma Filter</button>
+				<button id="saveSettings" type="button" onclick="saveSettingsClick();">Save Settings</button>
+				<input id="fileInput" type="file" name="files[]" style="display:none;"/>
+			  	<button id="loadSettings" type="button" onclick="loadSettingsClick();">Load Settings</button>
+			</ul>
+			<ul>
+			  Add wigdets:
+			  <button id="addWebcam" type="button" >Camera</button>
+			  <button id="addChromaFilter" type = 'button'>Chroma Mask</button>
 			  <button id="addStaccatoFilter" type = 'button'>Staccato Filter</button>
-			  <button id="saveSettings" type="button" onclick="saveSettingsClick();">Save Settings</button>
-			  <input id="fileInput" type="file" name="files[]" style="display:none;" multiple />
-			  <button id="loadSettings" type="button" onclick="loadSettingsClick();">Load Settings</button>
 			</ul>		
 		</div>
 		<div id="main">
@@ -31,11 +40,7 @@
 		</div>
 	</div>
 </body>
-<script src="generalFunctions.js"></script>
-<script src="dataObjs.js"></script>
-<script src="accordion.js"></script>
-<script src="fileIO.js"></script>
-<script src="widgets.js"></script>
+
 
 <script>
 	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
@@ -43,7 +48,7 @@
 	
 	mainDomElement = document.querySelector("#main");
 	document.querySelector("#addWebcam").onclick = function(){createWidget('webcam');}
-	document.querySelector("#addChromaFilter").onclick = function(){createWidget('chromaFilter');}
+	document.querySelector("#addChromaFilter").onclick = function(){createWidget('chromaMask');}
 	document.querySelector("#addStaccatoFilter").onclick = function(){createWidget('staccatoFilter');}
 	function saveSettingsClick ()
 	{

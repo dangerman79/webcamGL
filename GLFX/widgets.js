@@ -1,90 +1,69 @@
-var noOfCams = 0;
-var noOfChromaFilters = 0;
-var noOfStaccatoFilters = 0;
-var webcams = [];
-var gotCameras = false;
-
-
-/*function createChromaFilterWidget()
-{
-	// to much duplication from here and createWebcamWidget(), look to merge
-		var widget = new webcam();
-		
-		widget.data.type = "ChromaFilter"
-		widgets.push(widget);
-		noOfChromaFilters++;
-		label = "ChromaFilter #" + noOfChromaFilters;
-		widget.data.label = label
-		addWidgetAccordionSegment(widget);
-		createChromaFilterPanel(widget)
-		
-		setupAccordion ()
-		
-		expandWidget (widget, true)
-		populateSourceSelectors();
-}*/
-
 function createWidget(type)
 {
-		var widget = new WidgetObj();
-		widgets.push(widget);
-		
-		widget.data.type = type
+		//var widget = new WidgetObj();
 		
 		switch(type) {
 			case 'webcam':
-				noOfCams++;
-				label = "Webcam #" + noOfCams;
-				widget.data.label = label;
-				addWidgetAccordionSegment(widget);
-				addBasePanel(widget);
-				addVidWin(widget);
-				addBaseListener(widget);
-				widget.updateSource = function(src){
-					this.vidwinDom.src = src
-				}
-			break;
-			case 'chromaFilter':
-				noOfChromaFilters++;
-				label = "ChromaFilter #" + noOfChromaFilters;
-				widget.data.label = label;
-				widget.data.samplePx = [];
-				addWidgetAccordionSegment(widget);
-				addChromaControls(widget);
-				addCanvas(widget);
+				var widget = CreateCameraWidgetObj ();
 				
-				addBaseListener(widget);
-				addCanvasListener(widget);
-				widget.updateSource = function(src){
-					this.vidwinDom.src = src
-				}
+				
+			break;
+			case 'chromaMask':
+				var widget = CreateChromaMaskWidgetObj ();
+				
 			break;
 			case 'staccatoFilter':
-				noOfStaccatoFilters++;
-				label = "StaccatoFilter #" + noOfStaccatoFilters;
-				widget.data.label = label;
-				addWidgetAccordionSegment(widget);
-				addStaccatoControls(widget);
-				addCanvas(widget);
-				addBaseListener(widget);
-				widget.updateSource = function(src){
-					this.vidwinDom.src = src // change this to get the data from the canvas.
-				}
 				
 			break;
 			
 		
 		}	
+		widgets.push(widget);
+		
+		createWidgetDom(widget);
+		
 		setupAccordion ()
 		
-		expandWidget (widget, true)
-		populateSourceSelectors();
-	
+		expandWidget (widget, true)//needs work?
+		populateWidgetSelectors();
 }
 
+function createWidgetDom(widget)
+{
+	addWidgetAccordionSegment(widget);
+	addControlsDiv(widget);
+	widget.buildDomElement(widget);
+}
+
+function addControlsDiv(widget)
+{
+	newDiv = document.createElement('div');
+	widget.panelDom.appendChild(newDiv);
+	widget.controlsDivDom = newDiv;
+
+}
+
+function addCanvas(widget)
+{	
+	newCanvas = document.createElement('canvas');
+	widget.panelDom.appendChild(newCanvas);
+	widget.canvasDom = newCanvas;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*
 function addBaseListener (widget)
 {
-	widget.sourceSelectors.forEach (function(newSelect) {
+	widget.widgetSelectors.forEach (function(newSelect) {
 		newSelect.addEventListener("change", webCamInputChange.bind(event, widget));
 	})
 }
@@ -162,30 +141,10 @@ function chromaSettingsChange(widget, event)
 	}
 }
 
-function addBasePanel(widget)
-{
-	selectDomId = 'selector' + widgets.length
-		
-	newDiv = document.createElement('div');
-	newDiv.className ="controls";
-	
-	newLabel = document.createElement('label');
-	newLabel.innerHTML = 'Video source: ';
-	newDiv.appendChild(newLabel);
-	
-	newSelect = document.createElement('select');
-	newSelect.id = selectDomId;
-	newDiv.appendChild(newSelect);
-	
-	widget.panelDom.appendChild(newDiv);
 
-	widget.controlsDivDom = newDiv;
-	widget.sourceSelectors.push(newSelect);
-	
-		
-}
 
-function addCanvas(widget)
+
+/*function addCanvas(widget)
 {
 	videoDomId = 'videoWin' + widgets.length
 	newVid = document.createElement('video');
@@ -332,6 +291,9 @@ function addVidWin(widget)
 	
 	widget.vidwinDom = newVid;
 }
+*/
+
+
 function deleteWidget (widget, event)
 {
 	event.stopPropagation();
@@ -339,14 +301,15 @@ function deleteWidget (widget, event)
 	if (r == true) {
 		widget.accordionDom.parentNode.removeChild(widget.accordionDom);
 		widget.panelDom.parentNode.removeChild(widget.panelDom);
+		widget.data.isActive = false
 	}
 	index = widgets.indexOf(widget);
 	if (index > -1) {
 		widgets.splice(index, 1);
 	}
-	
+	populateWidgetSelectors();
 }
-
+/*
 function chromaFilterInputChange(widget, event)
 {
 	//console.log(widget)
@@ -372,23 +335,14 @@ function clearSamplePx(widget, event)
 {
 	widget.data.samplePx = [];
 }
+*/
 
-function webCamInputChange(widget, event)
-{
-	//console.log(widget)
-	//console.log(event)
-	
-	var newSrcStr = event.target.value;
-	widget.data.selectedDeviceId = newSrcStr;
-	
-	checkAllSelectors()
-}
-
+/*
 function checkAllSelectors()
 {
 	widgets.forEach (function(widget) 
 	{
-		widget.sourceSelectors.forEach (function(selector)
+		widget.widgetSelectors.forEach (function(selector)
 		{
 			newSrcStr = selector.value;
 			if (newSrcStr.substring(0,6)=='widget')
@@ -400,11 +354,12 @@ function checkAllSelectors()
 				
 			}else{
 				//console.log('cam')
-				var constraints = {
+				/*var constraints = {
 					video: {deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
 				  };
 				navigator.getUserMedia(constraints, handleVideo.bind(null ,widget), videoError)
-			}
+				*/
+/*			}
 		})
 	})
 	
@@ -425,48 +380,22 @@ function checkWidgetsSelectingOtherWidgets ()
 		})
 	})
 }
+*/
 
-function handleVideo(widget, stream) {
-	//widget.vidwinDom.src = window.URL.createObjectURL(stream);
-	widget.updateSource (window.URL.createObjectURL(stream));
-	checkWidgetsSelectingOtherWidgets();
-}
 
-function videoError(e) {
-	console.log('videoError: ', e);
-}
-
-function mediaDeviceError(error) {
-	console.log('navigator.getUserMedia error: ', error);
-}
-
-function populateSourceSelectors()
+function populateWidgetSelectors()
 {
 	
-	if (gotCameras != true){
-		navigator.mediaDevices.enumerateDevices().then(getCameras).catch(mediaDeviceError);
-		return;
-	}
 	
 	widgets.forEach (function(widget) 
 	{
-		widget.sourceSelectors.forEach (function (selector)
+		widget.widgetSelectors.forEach (function (selector)
 		{
 			//remove current options from dropdown
 			while (selector.firstChild) {
 			  selector.removeChild(selector.firstChild);
 			}
 			
-			// add cameras
-			var noOfCams2 = 0
-			webcams.forEach( function (webcam)
-			{
-				noOfCams2++;
-				var option = document.createElement('option');
-				option.value = webcam.deviceId;
-				option.text = 'Cam #' + noOfCams2 + ' ' + webcam.label
-				selector.appendChild(option);
-			})
 			widgets.forEach (function (widget2) 
 			{
 				var option = document.createElement('option');
@@ -480,23 +409,8 @@ function populateSourceSelectors()
 		})
 		
 	})
-	checkAllSelectors()
+	//checkAllSelectors()
 }
 
-function getCameras(deviceInfos)
-{
-	webcams = [];
-	for (i = 0; i !== deviceInfos.length; ++i) {
-			var deviceInfo = deviceInfos[i];
-			if (deviceInfo.kind === 'videoinput') {
-				webcams.push(deviceInfo);
-			}
-	}
-	gotCameras = true
-	populateSourceSelectors()
-}
 
-function mediaDevicesError(error) {
-	console.log('navigator.getUserMedia error: ', error);
-	console.log('something to do with enumerating attached media devices');
-}
+

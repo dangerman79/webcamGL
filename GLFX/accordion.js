@@ -54,7 +54,7 @@ function addAccordionSegment(parentElement, widget, id)
 	newInput.type = "text";
 	newInput.id = labelId;
 	newInput.value = widget.data.label;
-	newInput.addEventListener('change', updateWidgetLabel.bind(event, widget), false);
+	newInput.addEventListener('change', widget.updateLabel.bind(event, widget), false);
 	newInput.addEventListener('keyup', keyupWidgetLabel) 
 	newInput.addEventListener('click', function(event){event.stopPropagation()})
 	
