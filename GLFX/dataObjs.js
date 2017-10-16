@@ -20,7 +20,8 @@ function WidgetObj ()
 		"label": "",
 		"widgetId": "widget-" + guid(),
 		"selectedDeviceId": "", //change to array?
-		"isActive": "true",
+		"isActive": true,
+		"expanded": true
 	}
 	
 	//methods

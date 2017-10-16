@@ -22,15 +22,18 @@ function createWidget(type)
 		
 		createWidgetDom(widget);
 		
-		setupAccordion ()
+		//setupAccordion ()
 		
-		expandWidget (widget, true)//needs work?
+		//expandWidget (widget, true)//needs work?
+		
+		
 		populateWidgetSelectors();
+		checkWidgetsExpanded();
 }
 
 function createWidgetDom(widget)
 {
-	addWidgetAccordionSegment(widget);
+	addAccordionSegment(mainDomElement, widget);
 	addControlsDiv(widget);
 	widget.buildDomElement(widget);
 }
@@ -38,6 +41,7 @@ function createWidgetDom(widget)
 function addControlsDiv(widget)
 {
 	newDiv = document.createElement('div');
+	newDiv.className ="widgetControls"
 	widget.panelDom.appendChild(newDiv);
 	widget.controlsDivDom = newDiv;
 

@@ -1,4 +1,4 @@
-var noOfWigets = 0;
+/*var noOfWigets = 0;
 
 function setupAccordion ()
 {
@@ -38,21 +38,51 @@ function expandWidget(widget, value)
 		}
 }
 
+*/
+function expandWidgetClick(widget, event)
+{
+	widget.data.expanded = !widget.data.expanded;
+	checkWidgetsExpanded();
+}
 
+function checkWidgetsExpanded()
+{
+	widgets.forEach (function(widget) 
+	{
+		if(widget.data.expanded == true )
+		{
+			if(widget.panelHeight != widget.panelDom.scrollHeight)
+			{
+				widget.panelHeight = widget.panelDom.scrollHeight
+				widget.panelDom.style.maxHeight = widget.panelDom.scrollHeight + "px";;
+			}			
+		}else{
+			if(widget.panelHeight != null)
+			{
+				widget.panelHeight = null
+				widget.panelDom.style.maxHeight = widget.panelHeight;
+			}
+		}
+		
+	})
+	
+}
 
+setInterval(checkWidgetsExpanded, 500);
 
-function addAccordionSegment(parentElement, widget, id)
+function addAccordionSegment(parentElement, widget)
 {
 	
-	var labelId = id+"Label"
+	//var labelId = id+"Label"
 	newButton = document.createElement('button');
 	newButton.className  = "accordion";
-	parentElement.appendChild(newButton);
+	newButton.addEventListener("click", expandWidgetClick.bind(event, widget))
+	parentElement.insertBefore(newButton, parentElement.childNodes[0]);
+	
 	
 	newInput = document.createElement('input');
 	newInput.className  = "accordionLabel";
 	newInput.type = "text";
-	newInput.id = labelId;
 	newInput.value = widget.data.label;
 	newInput.addEventListener('change', widget.updateLabel.bind(event, widget), false);
 	newInput.addEventListener('keyup', keyupWidgetLabel) 
@@ -70,8 +100,7 @@ function addAccordionSegment(parentElement, widget, id)
 	
 	newDiv = document.createElement('div');
 	newDiv.className ="panel"
-	newDiv.id = id;
-	parentElement.appendChild(newDiv);
+	parentElement.insertBefore(newDiv, parentElement.childNodes[1]);
 	
 	widget.panelDom = newDiv;
 	widget.labelDom = newInput;
