@@ -56,9 +56,11 @@ function importLoadData(dataStr)
 		widget = createWidget(data.type)
 		widget.data = data
 		createWidgetDom(widget);
-		widget.changeMethod(widget);
 	})
 	
+	widgets.forEach (function(widget){
+		widget.changeMethod(widget);
+	})
 	
 	isLoading = false;
 

@@ -13,7 +13,7 @@ function createWidget(type)
 				
 			break;
 			case 'staccatoFilter':
-				
+				var widget = CreateStaccatoFilterWidgetObj ();
 			break;
 			case 'videoOutput':
 				var widget = CreateVideoOutputWidgetObj ();

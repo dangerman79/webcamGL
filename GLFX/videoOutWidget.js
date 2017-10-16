@@ -2,19 +2,19 @@ var noOfVidOuts = 0;
 
 function CreateVideoOutputWidgetObj ()
 {
-	returnObj = new WidgetObj ()
+	newWidget = new WidgetObj ()
 	
 	//unique vars on this object
-	returnObj.vidwinDom = {}
+	newWidget.vidwinDom = {}
 
 	
 	//constructor
 	noOfVidOuts++;
-	returnObj.data.label = "Video Output #" + noOfVidOuts;
-	returnObj.data.type = 'videoOutput'
+	newWidget.data.label = "Video Output #" + noOfVidOuts;
+	newWidget.data.type = 'videoOutput'
 	
 	//methods
-	returnObj.buildDomElement = function (widget) {
+	newWidget.buildDomElement = function (widget) {
 		controlsDiv = widget.controlsDivDom
 	
 		newLabel = document.createElement('label');
@@ -37,7 +37,7 @@ function CreateVideoOutputWidgetObj ()
 		widget.vidwinDom = newVid;
 	}
 	
-	returnObj.changeMethod = function (widget) {
+	newWidget.changeMethod = function (widget) {
 
 		widget.sourceWidget = getWidgetById (widget.data.selectedDeviceId)
 		
@@ -45,7 +45,7 @@ function CreateVideoOutputWidgetObj ()
 		var stream = widget.canvasDom.captureStream();
 		widget.vidwinDom.srcObject = stream;
 	}
-	return returnObj;
+	return newWidget;
 }
 
 function vidOutInputChange(widget, event)

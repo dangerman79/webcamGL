@@ -2,19 +2,19 @@ var noOfCams = 0;
 
 function CreateCameraWidgetObj ()
 {
-	returnObj = new WidgetObj ()
+	newWidget = new WidgetObj ()
 	
 	//unique vars on this object
-	returnObj.vidwinDom = {}
+	newWidget.vidwinDom = {}
 
 	
 	//constructor
 	noOfCams++;
-	returnObj.data.label = "Webcam #" + noOfCams;
-	returnObj.data.type = 'webcam'
+	newWidget.data.label = "Webcam #" + noOfCams;
+	newWidget.data.type = 'webcam'
 	
 	//methods
-	returnObj.buildDomElement = function (widget) {
+	newWidget.buildDomElement = function (widget) {
 		
 		controlsDiv = widget.controlsDivDom
 		
@@ -64,18 +64,18 @@ function CreateCameraWidgetObj ()
 		requestAnimationFrame(draw.bind(event, widget));
 	}
 	
-	returnObj.updateSource = function (src) {
+	newWidget.updateSource = function (src) {
 		this.vidwinDom.src = src
 	}
 	
-	returnObj.changeMethod = function (widget) {
+	newWidget.changeMethod = function (widget) {
 		newSrcStr = widget.data.selectedDeviceId
 		var constraints = {
 			video: {deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
 		};
 		navigator.getUserMedia(constraints, handleVideo.bind(null ,widget), videoError)
 	}
-	return returnObj;
+	return newWidget;
 }
 
 function webCamInputChange(widget, event)
