@@ -76,7 +76,7 @@ function staccatoSettingsChange(widget, event)
 
 function applyStaccatoFilter(widget)
 {
-	if(widget.sourceWidget == null) return
+	if(widget.sourceWidget == null || widget.sourceWidget.canvasDom == null ) return
 	
 	
 	readContext = widget.sourceWidget.canvasDom.getContext('2d')

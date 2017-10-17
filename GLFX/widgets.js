@@ -17,7 +17,10 @@ function createWidget(type)
 			break;
 			case 'videoOutput':
 				var widget = CreateVideoOutputWidgetObj ();
+			break;
 			
+			case 'backroundMask':
+				var widget = CreateBackroundMaskWidgetObj ();
 			break;
 		}	
 		widgets.push(widget);

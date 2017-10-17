@@ -88,6 +88,8 @@ function webCamInputChange(widget, event)
 function handleVideo(widget, stream) {
 	widget.updateSource (window.URL.createObjectURL(stream));
 	//checkWidgetsSelectingOtherWidgets();
+	
+	//const mediaStreamTrack = mediaStream.getVideoTracks()[0];
 }
 
 function videoError(e) {

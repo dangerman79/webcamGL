@@ -92,7 +92,7 @@ function CreateChromaMaskWidgetObj ()
 		widget.sourceWidget = getWidgetById (widget.data.selectedDeviceId)
 		widget.data.showSamplePx = widget.samplePxDom.checked;
 		widget.data.liveSampling = widget.liveSampleDom.checked
-		tol = widget.toleranceDom.value
+		tol = widget.toleranceDom.value //TODO check tol is loading correctly
 		if(isNumeric(tol)){
 			widget.data.tolerance = Number(widget.toleranceDom.value);
 		}
@@ -104,7 +104,7 @@ function CreateChromaMaskWidgetObj ()
 
 function applyChromaMask(widget) 
 {	
-	if(widget.sourceWidget.canvasDom == null) return
+	if(widget.sourceWidget == null || widget.sourceWidget.canvasDom == null ) return
 	
 	readContext = widget.sourceWidget.canvasDom.getContext('2d')
 	writeContext = widget.canvasDom.getContext('2d')

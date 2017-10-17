@@ -13,6 +13,7 @@
 <script src="widgets.js"></script>
 <script src="cameraWidget.js"></script>
 <script src="chromaMaskWidget.js"></script>
+<script src="backgroundMaskWidget.js"></script>
 <script src="videoOutWidget.js"></script>
 <script src="staccatoFilterWidget.js"></script>
 
@@ -34,6 +35,7 @@
 			  Add wigdets:
 			  <button id="addWebcam" type="button" >Camera</button>
 			  <button id="addChromaFilter" type = 'button'>Chroma Mask</button>
+			  <button id="addBkMask" type = 'button'>Backround Mask</button>
 			  <button id="addStaccatoFilter" type = 'button'>Staccato Filter</button>
 			  <button id="addVideoOutput" type = 'button'>Video Output</button>
 			</ul>		
@@ -54,7 +56,7 @@
 	document.querySelector("#addChromaFilter").onclick = function(){createWidget('chromaMask');}
 	document.querySelector("#addStaccatoFilter").onclick = function(){createWidget('staccatoFilter');}
 	document.querySelector("#addVideoOutput").onclick = function(){createWidget('videoOutput');}
-	
+	document.querySelector("#addBkMask").onclick = function(){createWidget('backroundMask');}
 	
 	function saveSettingsClick ()
 	{
