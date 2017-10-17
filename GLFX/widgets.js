@@ -22,6 +22,10 @@ function createWidget(type)
 			case 'backroundMask':
 				var widget = CreateBackroundMaskWidgetObj ();
 			break;
+			
+			case 'diffMask':
+				var widget = CreateDiffMaskWidgetObj ();
+			break;
 		}	
 		widgets.push(widget);
 		

@@ -70,9 +70,18 @@ function CreateCameraWidgetObj ()
 	
 	newWidget.changeMethod = function (widget) {
 		newSrcStr = widget.data.selectedDeviceId
+		
+		/*isoSet = new MediaSettingsRange();
+		isoSet.min = 200;
+		isoSet.max = 200;
+		isoSet.step = 20;
 		var constraints = {
-			video: {deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
-		};
+			video: {width: 640, height: 480, whiteBalanceMode: 'none', iso: isoSet,deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
+		};*/
+		
+		var constraints = {
+			video: {width: 1920, height: 1080, deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
+		}
 		navigator.getUserMedia(constraints, handleVideo.bind(null ,widget), videoError)
 	}
 	return newWidget;
@@ -89,7 +98,13 @@ function handleVideo(widget, stream) {
 	widget.updateSource (window.URL.createObjectURL(stream));
 	//checkWidgetsSelectingOtherWidgets();
 	
-	//const mediaStreamTrack = mediaStream.getVideoTracks()[0];
+	/*const mediaStreamTrack = stream.getVideoTracks()[0];
+	const imageCapture = new ImageCapture(mediaStreamTrack);
+	console.log(imageCapture);
+	const capabilities = mediaStreamTrack.getCapabilities();
+	const settings = mediaStreamTrack.getSettings();
+	
+	test = capabilities.zoom.min;*/
 }
 
 function videoError(e) {

@@ -69,9 +69,13 @@ function CreateChromaMaskWidgetObj ()
 		showSamplePxCheck.addEventListener("change", chromaSettingsChange.bind(event, widget));
 	
 		newbutton = document.createElement('button');
+		newbutton.innerHTML = 'Delete last sample';
+		controlsDiv.appendChild(newbutton);
+		newbutton.addEventListener("click", delSamplePx.bind(event, widget));
+		
+		newbutton = document.createElement('button');
 		newbutton.innerHTML = 'Clear Sample Pixels';
 		controlsDiv.appendChild(newbutton);
-	
 		newbutton.addEventListener("click", clearSamplePx.bind(event, widget));
 		
 		newCanvas = document.createElement('canvas');
@@ -238,6 +242,12 @@ function addSamplePx(widget, event)
 	
 	setChromaRangeFromSamples(widget)
 }
+
+function delSamplePx(widget, event)
+{
+	widget.data.samplePx.splice(-1,1)
+}
+
 function clearSamplePx(widget, event)
 {
 	widget.data.samplePx = [];

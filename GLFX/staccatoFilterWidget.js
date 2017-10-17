@@ -6,7 +6,7 @@ function CreateStaccatoFilterWidgetObj ()
 	
 	//unique vars on this object
 	newWidget.framesPerSampleDom = {}
-	newWidget.data.framesPerSample = 30;
+	newWidget.data.framesPerSample = 5;
 	newWidget.previousData = [];
 	newWidget.frameCount = 0;
 	
@@ -120,7 +120,7 @@ function applyStaccatoFilter(widget)
 		
 		
 	}/**/
-	if(widget.frameCount == widget.data.framesPerSample)
+	if(widget.frameCount >= widget.data.framesPerSample)
 	{
 		widget.previousData = outImData;
 		widget.frameCount = 0;

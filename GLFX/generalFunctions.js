@@ -38,3 +38,14 @@ function copyImageData(source, result)
 		result.data[i] = source.data[i];
 	}
 }
+
+function copyImageRawData(source, result)
+{
+	//result.data = source.data.slice(0);
+	
+	result = [];
+	for (var i = 0; i < source.length; i++) {
+		result[i] = source[i];
+	}
+	return result
+}
