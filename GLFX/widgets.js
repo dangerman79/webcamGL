@@ -19,6 +19,10 @@ function createWidget(type)
 				var widget = CreateVideoOutputWidgetObj ();
 			break;
 			
+			case 'videoPlayer':
+				var widget = CreateVideoPlayerWidgetObj ();
+			break;
+			
 			case 'backroundMask':
 				var widget = CreateBackroundMaskWidgetObj ();
 			break;

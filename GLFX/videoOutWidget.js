@@ -2,6 +2,8 @@ var noOfVidOuts = 0;
 
 function CreateVideoOutputWidgetObj ()
 {
+	// TODO Should have Canvas for consistancy
+	
 	newWidget = new WidgetObj ()
 	
 	//unique vars on this object

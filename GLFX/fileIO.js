@@ -36,7 +36,6 @@ function createSaveData(projName)
 function loadSettingsFile(evt)
 {
 	var files = evt.target.files;
-	fileInputDlg = document.getElementById('fileInput');
 	var reader = new FileReader();
 	reader.onload = (function(theFile) {
 		console.log (theFile.target.result);
