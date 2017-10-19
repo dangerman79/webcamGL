@@ -4,10 +4,12 @@ function createWidget(type)
 		
 		switch(type) {
 			case 'webcam':
-				var widget = CreateCameraWidgetObj ();
-				
-				
+				var widget = CreateCameraWidgetObj ();	
 			break;
+			case 'colourFlatten':
+				var widget = CreateColourFlattenWidgetObj (type);	
+			break
+			
 			case 'chromaMask':
 				var widget = CreateChromaMaskWidgetObj ();
 				

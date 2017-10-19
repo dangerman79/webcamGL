@@ -18,6 +18,7 @@
 <script src="staccatoFilterWidget.js"></script>
 <script src="differenceMaskWidget.js"></script>
 <script src="videoPlayerWidget.js"></script>
+<script src="colourFlattenWidget.js"></script>
 <!--<script src="multiInputWidget.js"></script>-->
 </head>
 <body>
@@ -42,6 +43,7 @@
 			  <button id="addBkMask" type = 'button'>Backround Mask</button>
 			  <button id="addDiffMask" type = 'button'>Difference Mask</button>
 			  <button id="addStaccatoFilter" type = 'button'>Staccato Filter</button>
+			  <button id="addColourFlatten" type = 'button'>Colour Flatten</button>
 			  <button id="addVideoOutput" type = 'button'>Video Output</button>
 			</ul>		
 		</div>
@@ -64,6 +66,7 @@
 	document.querySelector("#addBkMask").onclick = function(){createWidget('backroundMask');}
 	document.querySelector("#addDiffMask").onclick = function(){createWidget('diffMask');}
 	document.querySelector("#addVideoFile").onclick = function(){createWidget('videoPlayer');}
+	document.querySelector("#addColourFlatten").onclick = function(){createWidget('colourFlatten');}
 	
 	function saveSettingsClick ()
 	{
