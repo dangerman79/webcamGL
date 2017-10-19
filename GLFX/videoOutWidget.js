@@ -25,7 +25,7 @@ function CreateVideoOutputWidgetObj ()
 		
 		newSelect = document.createElement('select');
 		controlsDiv.appendChild(newSelect);
-		newSelect.value = widget.data.selectedDeviceId;
+		newSelect.value = widget.data.selectedDeviceIds[0];
 		widget.widgetSelectors.push(newSelect);
 		widget.widgetSelectors.forEach (function(newSelect) {
 			newSelect.addEventListener("change", vidOutInputChange.bind(event, widget));
@@ -41,9 +41,9 @@ function CreateVideoOutputWidgetObj ()
 	
 	newWidget.changeMethod = function (widget) {
 
-		widget.sourceWidget = getWidgetById (widget.data.selectedDeviceId)
+		widget.sourceWidgets[0] = getWidgetById (widget.data.selectedDeviceIds[0])
 		
-		widget.canvasDom = widget.sourceWidget.canvasDom;
+		widget.canvasDom = widget.sourceWidgets[0].canvasDom;
 		var stream = widget.canvasDom.captureStream();
 		widget.vidwinDom.srcObject = stream;
 	}
@@ -53,6 +53,6 @@ function CreateVideoOutputWidgetObj ()
 function vidOutInputChange(widget, event)
 {
 	var newSrcStr = event.target.value;
-	widget.data.selectedDeviceId = newSrcStr;
+	widget.data.selectedDeviceIds[0] = newSrcStr;
 	widget.changeMethod(widget)
 }

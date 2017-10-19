@@ -25,7 +25,7 @@ function CreateCameraWidgetObj ()
 		newSelect = document.createElement('select');
 		controlsDiv.appendChild(newSelect);
 		widget.camSelectors.push(newSelect);
-		newSelect.value = widget.data.selectedDeviceId;
+		newSelect.value = widget.data.selectedDeviceIds[0];
 		widget.camSelectors.forEach (function(newSelect) {
 			newSelect.addEventListener("change", webCamInputChange.bind(event, widget));
 		})
@@ -69,7 +69,7 @@ function CreateCameraWidgetObj ()
 	}
 	
 	newWidget.changeMethod = function (widget) {
-		newSrcStr = widget.data.selectedDeviceId
+		newSrcStr = widget.data.selectedDeviceIds[0]
 		
 		/*isoSet = new MediaSettingsRange();
 		isoSet.min = 200;
@@ -80,7 +80,8 @@ function CreateCameraWidgetObj ()
 		};*/
 		
 		var constraints = {
-			video: {width: 1920, height: 1080, deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
+			//video: {width: 1920, height: 1080, deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
+			video: {deviceId: newSrcStr ? {exact: newSrcStr} : undefined}
 		}
 		navigator.getUserMedia(constraints, handleVideo.bind(null ,widget), videoError)
 	}
@@ -90,7 +91,7 @@ function CreateCameraWidgetObj ()
 function webCamInputChange(widget, event)
 {
 	var newSrcStr = event.target.value;
-	widget.data.selectedDeviceId = newSrcStr;
+	widget.data.selectedDeviceIds[0] = newSrcStr;
 	widget.changeMethod(widget)
 }
 
@@ -147,10 +148,10 @@ function populateCamSelectors(webcams)
 					selector.appendChild(option);
 				})
 				
-				selector.value = widget.data.selectedDeviceId;
+				selector.value = widget.data.selectedDeviceIds[0];
 				
 					var constraints = {
-						video: {deviceId: widget.data.selectedDeviceId ? {exact: widget.data.selectedDeviceId} : undefined}
+						video: {deviceId: widget.data.selectedDeviceIds[0] ? {exact: widget.data.selectedDeviceIds[0]} : undefined}
 					};
 					navigator.getUserMedia(constraints, handleVideo.bind(null ,widget), videoError)
 				//checkAllSelectors()

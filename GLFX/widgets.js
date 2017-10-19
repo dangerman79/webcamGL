@@ -9,7 +9,9 @@ function createWidget(type)
 			case 'colourFlatten':
 				var widget = CreateColourFlattenWidgetObj (type);	
 			break
-			
+			case 'mixer':
+				var widget = CreateMixerWidgetObj (type);
+			break
 			case 'chromaMask':
 				var widget = CreateChromaMaskWidgetObj ();
 				
@@ -94,8 +96,9 @@ function populateWidgetSelectors()
 
 	widgets.forEach (function(widget) 
 	{
-		widget.widgetSelectors.forEach (function (selector)
+		for (var i = 0; i < widget.widgetSelectors.length; i++)
 		{
+			selector = widget.widgetSelectors[i]
 			//remove current options from dropdown
 			while (selector.firstChild) {
 			  selector.removeChild(selector.firstChild);
@@ -110,11 +113,24 @@ function populateWidgetSelectors()
 				
 			})
 			
-			selector.value = widget.data.selectedDeviceId;
-		})
+			selector.value = widget.data.selectedDeviceIds[i];
+		}
 		
 	})
 }
 
+function inputChange(widget, event)
+{
+	//var newSrcStr = event.target.value;
+	for (var i = 0; i < widget.widgetSelectors.length; i++)
+	{
+		widget.data.selectedDeviceIds[i] = widget.widgetSelectors[i].value
+	}
+	//widget.data.selectedDeviceIds[0] = newSrcStr;
+	widget.changeMethod(widget)
+}
 
-
+function settingsChange(widget, event)
+{
+	widget.changeMethod(widget)
+}

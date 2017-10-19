@@ -19,7 +19,7 @@
 <script src="differenceMaskWidget.js"></script>
 <script src="videoPlayerWidget.js"></script>
 <script src="colourFlattenWidget.js"></script>
-<!--<script src="multiInputWidget.js"></script>-->
+<script src="mixerWidget.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -38,7 +38,7 @@
 			  Add wigdets:
 			  <button id="addWebcam" type="button" >Camera</button>
 			  <button id="addVideoFile" type="button" >Video Player</button>
-			  <button id="addMultiInput" type="button" >Multi Input</button>
+			  <button id="addMultiInput" type="button" >Widget Mixer</button>
 			  <button id="addChromaFilter" type = 'button'>Chroma Mask</button>
 			  <button id="addBkMask" type = 'button'>Backround Mask</button>
 			  <button id="addDiffMask" type = 'button'>Difference Mask</button>
@@ -67,6 +67,8 @@
 	document.querySelector("#addDiffMask").onclick = function(){createWidget('diffMask');}
 	document.querySelector("#addVideoFile").onclick = function(){createWidget('videoPlayer');}
 	document.querySelector("#addColourFlatten").onclick = function(){createWidget('colourFlatten');}
+	document.querySelector("#addMultiInput").onclick = function(){createWidget('mixer');}
+	
 	
 	function saveSettingsClick ()
 	{

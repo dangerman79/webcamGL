@@ -28,10 +28,10 @@ function CreateDiffMaskWidgetObj ()
 		
 		newSelect = document.createElement('select');
 		controlsDiv.appendChild(newSelect);
-		newSelect.value = widget.data.selectedDeviceId;
+		newSelect.value = widget.data.selectedDeviceIds[0];
 		widget.widgetSelectors.push(newSelect);
 		widget.widgetSelectors.forEach (function(newSelect) {
-			newSelect.addEventListener("change", chromaInputChange.bind(event, widget));
+			newSelect.addEventListener("change", inputChange.bind(event, widget));
 		})
 		newLabel = document.createElement('label');
 		newLabel.innerHTML = 'Tolerance:';
@@ -42,7 +42,7 @@ function CreateDiffMaskWidgetObj ()
 		tolerance.value = widget.data.tolerance ;
 		controlsDiv.appendChild(tolerance);
 		widget.toleranceDom = tolerance;
-		tolerance.addEventListener("change", chromaSettingsChange.bind(event, widget));
+		tolerance.addEventListener("change", settingsChange.bind(event, widget));
 		
 		newLabel = document.createElement('label');
 		newLabel.innerHTML = 'Frames Between Samples:';
@@ -51,7 +51,7 @@ function CreateDiffMaskWidgetObj ()
 		framesPerSample = document.createElement('input');
 		framesPerSample.type = "text"
 		framesPerSample.value = widget.data.framesPerSample ;
-		framesPerSample.addEventListener("change", chromaSettingsChange.bind(event, widget));
+		framesPerSample.addEventListener("change", settingsChange.bind(event, widget));
 		controlsDiv.appendChild(framesPerSample);
 		widget.framesPerSampleDom = framesPerSample;
 		
@@ -69,7 +69,7 @@ function CreateDiffMaskWidgetObj ()
 		requestAnimationFrame(draw.bind(event, widget));
 
 		newWidget.changeMethod = function (widget) {
-			widget.sourceWidget = getWidgetById (widget.data.selectedDeviceId)
+			widget.sourceWidgets[0] = getWidgetById (widget.data.selectedDeviceIds[0])
 			tol = widget.toleranceDom.value //TODO check tol is loading correctly
 			if(isNumeric(tol)){
 				widget.data.tolerance = Number(widget.toleranceDom.value);
@@ -88,12 +88,12 @@ function CreateDiffMaskWidgetObj ()
 
 function applyDiffMask(widget) 
 {
-	if(widget.sourceWidget == null || widget.sourceWidget.canvasDom == null ) return
-		readContext = widget.sourceWidget.canvasDom.getContext('2d')
+	if(widget.sourceWidgets[0] == null || widget.sourceWidgets[0].canvasDom == null ) return
+		readContext = widget.sourceWidgets[0].canvasDom.getContext('2d')
 	writeContext = widget.canvasDom.getContext('2d')
 
-	width = widget.sourceWidget.canvasDom.width;
-	height = widget.sourceWidget.canvasDom.height;
+	width = widget.sourceWidgets[0].canvasDom.width;
+	height = widget.sourceWidgets[0].canvasDom.height;
 	
 	widget.canvasDom.width = width;
 	widget.canvasDom.height = height;

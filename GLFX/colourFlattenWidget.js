@@ -25,10 +25,10 @@ function CreateColourFlattenWidgetObj (type)
 		
 		newSelect = document.createElement('select');
 		controlsDiv.appendChild(newSelect);
-		newSelect.value = widget.data.selectedDeviceId;
+		newSelect.value = widget.data.selectedDeviceIds[0];
 		widget.widgetSelectors.push(newSelect);
 		widget.widgetSelectors.forEach (function(newSelect) {
-			newSelect.addEventListener("change", chromaInputChange.bind(event, widget));
+			newSelect.addEventListener("change", inputChange.bind(event, widget));
 		})
 		
 		newLabel = document.createElement('label');
@@ -40,7 +40,7 @@ function CreateColourFlattenWidgetObj (type)
 		colSpanDom.value = widget.data.colSpan ;
 		controlsDiv.appendChild(colSpanDom);
 		widget.colSpanDom = colSpanDom;
-		colSpanDom.addEventListener("change", chromaSettingsChange.bind(event, widget));
+		colSpanDom.addEventListener("change", settingsChange.bind(event, widget));
 	
 		newCanvas = document.createElement('canvas');
 		widget.panelDom.appendChild(newCanvas);
@@ -57,7 +57,7 @@ function CreateColourFlattenWidgetObj (type)
 	}
 	
 	newWidget.changeMethod = function (widget) {
-		widget.sourceWidget = getWidgetById (widget.data.selectedDeviceId)
+		widget.sourceWidgets[0] = getWidgetById (widget.data.selectedDeviceIds[0])
 		colSpan = widget.colSpanDom.value 
 		if(isNumeric(colSpan)){
 			widget.data.colSpan = Number(widget.colSpanDom.value);
@@ -68,13 +68,13 @@ function CreateColourFlattenWidgetObj (type)
 
 function applyColFlat(widget) 
 {	
-	if(widget.sourceWidget == null || widget.sourceWidget.canvasDom == null ) return
+	if(widget.sourceWidgets[0] == null || widget.sourceWidgets[0].canvasDom == null ) return
 	
-	readContext = widget.sourceWidget.canvasDom.getContext('2d')
+	readContext = widget.sourceWidgets[0].canvasDom.getContext('2d')
 	writeContext = widget.canvasDom.getContext('2d')
 
-	width = widget.sourceWidget.canvasDom.width;
-	height = widget.sourceWidget.canvasDom.height;
+	width = widget.sourceWidgets[0].canvasDom.width;
+	height = widget.sourceWidgets[0].canvasDom.height;
 	
 	widget.canvasDom.width = width;
 	widget.canvasDom.height = height;

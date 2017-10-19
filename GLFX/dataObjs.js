@@ -12,14 +12,14 @@ function WidgetObj ()
 	this.widgetSelectors = []
 	this.camSelectors = []
 	
-	this.sourceWidget = {}
+	this.sourceWidgets = []
 	
 	//save data
 	this.data = {
 		"type": "",
 		"label": "",
 		"widgetId": "widget-" + guid(),
-		"selectedDeviceId": "", //change to array?
+		"selectedDeviceIds": [],
 		"isActive": true,
 		"expanded": true
 	}

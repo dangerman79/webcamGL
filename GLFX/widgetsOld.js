@@ -181,14 +181,14 @@ function addChromaControls(widget)
 	newbutton.innerHTML = 'Clear Sample Pixels';
 	controlsDiv.appendChild(newbutton);
 	
-	showSamplePxCheck.addEventListener("change", chromaSettingsChange.bind(event, widget));
-	tolerance.addEventListener("change", chromaSettingsChange.bind(event, widget));
+	showSamplePxCheck.addEventListener("change", settingsChange.bind(event, widget));
+	tolerance.addEventListener("change", settingsChange.bind(event, widget));
 	
 	
 	newbutton.addEventListener("click", clearSamplePx.bind(event, widget));
 }
 
-function chromaSettingsChange(widget, event)
+function settingsChange(widget, event)
 {
 	widget.data.showSamplePx = widget.samplePxDom.checked;
 	tol = widget.toleranceDom.value
@@ -368,7 +368,7 @@ function chromaFilterInputChange(widget, event)
 	//console.log(event)
 	
 	var newSrcStr = event.target.value;
-	widget.data.selectedDeviceId = newSrcStr;
+	widget.data.selectedDeviceIds[0] = newSrcStr;
 	
 	checkAllSelectors()
 
@@ -394,7 +394,7 @@ function webCamInputChange(widget, event)
 	//console.log(event)
 	
 	var newSrcStr = event.target.value;
-	widget.data.selectedDeviceId = newSrcStr;
+	widget.data.selectedDeviceIds[0] = newSrcStr;
 	
 	checkAllSelectors()
 }
@@ -431,7 +431,7 @@ function checkWidgetsSelectingOtherWidgets ()
 	{
 		widgets.forEach (function(widget2) 
 		{
-			if (widget2.data.selectedDeviceId == widget.data.widgetId)
+			if (widget2.data.selectedDeviceIds[0] == widget.data.widgetId)
 			{
 				//widget2.vidwinDom.src = widget.vidwinDom.src
 				widget2.updateSource (widget.vidwinDom.src);
@@ -491,7 +491,7 @@ function populatewidgetSelectors()
 				
 			})
 			
-			selector.value = widget.data.selectedDeviceId;
+			selector.value = widget.data.selectedDeviceIds[0];
 		})
 		
 	})
