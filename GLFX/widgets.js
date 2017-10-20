@@ -19,6 +19,9 @@ function createWidget(type)
 			case 'staccatoFilter':
 				var widget = CreateStaccatoFilterWidgetObj ();
 			break;
+			case 'staccatoTrails':
+				var widget = CreateStaccatoTrailsWidgetObj (type);
+			break;
 			case 'videoOutput':
 				var widget = CreateVideoOutputWidgetObj ();
 			break;

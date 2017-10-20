@@ -16,6 +16,7 @@
 <script src="backgroundMaskWidget.js"></script>
 <script src="videoOutWidget.js"></script>
 <script src="staccatoFilterWidget.js"></script>
+<script src="staccatoTrailsWidget.js"></script>
 <script src="differenceMaskWidget.js"></script>
 <script src="videoPlayerWidget.js"></script>
 <script src="colourFlattenWidget.js"></script>
@@ -43,6 +44,7 @@
 			  <button id="addBkMask" type = 'button'>Backround Mask</button>
 			  <button id="addDiffMask" type = 'button'>Difference Mask</button>
 			  <button id="addStaccatoFilter" type = 'button'>Staccato Filter</button>
+			  <button id="addStaccatoTrails" type = 'button'>Staccato Trails</button>
 			  <button id="addColourFlatten" type = 'button'>Colour Flatten</button>
 			  <button id="addVideoOutput" type = 'button'>Video Output</button>
 			</ul>		
@@ -62,6 +64,7 @@
 	document.querySelector("#addWebcam").onclick = function(){createWidget('webcam');}
 	document.querySelector("#addChromaFilter").onclick = function(){createWidget('chromaMask');}
 	document.querySelector("#addStaccatoFilter").onclick = function(){createWidget('staccatoFilter');}
+	document.querySelector("#addStaccatoTrails").onclick = function(){createWidget('staccatoTrails');}
 	document.querySelector("#addVideoOutput").onclick = function(){createWidget('videoOutput');}
 	document.querySelector("#addBkMask").onclick = function(){createWidget('backroundMask');}
 	document.querySelector("#addDiffMask").onclick = function(){createWidget('diffMask');}
