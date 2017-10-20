@@ -123,7 +123,7 @@ function applyBkMask(widget)
 			outImData[i] = 0;
 			outImData[i + 1] = 255;
 			outImData[i + 2] = 255;
-			outImData[i + 3] = 255;
+			outImData[i + 3] = 0;
 			
 		}else{
 			outImData[i] = r;

@@ -26,19 +26,6 @@ function getPointLocationInData(x,y, width, height)
 	
 }
 
-function copyImageData(source, result)
-{
-	result.width = source.width;
-	result.height = source.height;
-	
-	//result.data = source.data.slice(0);
-	
-	result.data = [];
-	for (var i = 0; i < source.data.length; i++) {
-		result.data[i] = source.data[i];
-	}
-}
-
 function copyImageRawData(source, result)
 {
 	//result.data = source.data.slice(0);

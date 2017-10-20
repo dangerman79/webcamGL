@@ -107,7 +107,7 @@ function applyDiffMask(widget)
 	
 	tol = widget.data.tolerance
 	
-	if (widget.lastIm.length == 0){widget.lastIm = copyImageRawData(inputImData, widget.lastIm)}
+	if (widget.lastIm.length == 0){widget.lastIm = copyImageRawData(inputImData, widget.lastIm)} //speedup possible here
 	for (var i = 0; i < inputImData.length; i+=4) {
 		r = inputImData[i]
 		g = inputImData[i + 1]
@@ -132,7 +132,7 @@ function applyDiffMask(widget)
 			outImData[i] = 0;
 			outImData[i + 1] = 255;
 			outImData[i + 2] = 255;
-			outImData[i + 3] = 255;
+			outImData[i + 3] = 0;
 			
 		}else{
 			outImData[i] = r;

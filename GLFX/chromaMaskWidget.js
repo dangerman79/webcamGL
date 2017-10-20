@@ -147,7 +147,7 @@ function applyChromaMask(widget)
 			outImData[i] = 0;
 			outImData[i + 1] = 255;
 			outImData[i + 2] = 255;
-			outImData[i + 3] = 255;
+			outImData[i + 3] = 0;
 			
 		}else{
 			outImData[i] = r;
@@ -159,6 +159,7 @@ function applyChromaMask(widget)
 		// note: i+3 is the alpha channel, we are skipping that one
 	  }
 	  
+	  
 	if (widget.data.showSamplePx == true)
 	{
 	  widget.data.samplePx.forEach (function(px) 
@@ -169,11 +170,13 @@ function applyChromaMask(widget)
 			outImData[dataLoc] = 255;
 			outImData[dataLoc + 1] = 0;
 			outImData[dataLoc + 2] = 0;
+			outImData[dataLoc + 3] = 255;
 			
 			dataLoc = getPointLocationInData(px.x-q, px.y+q, width, height)
 			outImData[dataLoc] = 255;
 			outImData[dataLoc + 1] = 0;
 			outImData[dataLoc + 2] = 0;
+			outImData[dataLoc + 3] = 255;
 		  }
 	  })
 	}

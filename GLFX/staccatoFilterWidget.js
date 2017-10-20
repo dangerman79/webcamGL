@@ -95,15 +95,14 @@ function applyStaccatoFilter(widget)
 	var imageDataOut =  writeContext.getImageData(0, 0, width, height);
 	outImData = imageDataOut.data	
 	
-	//copyImageData(imageDataIn, imageDataOut)
-	
 	
 		  // modify pixels applying a simple effect
 	for (var i = 0; i < inputImData.length; i+=4) {
 		r = inputImData[i]
 		g = inputImData[i + 1]
 		b = inputImData[i + 2]
-		if(r == 0 && g == 255 && b == 255)
+		a = inputImData[i + 3]
+		if(a == 0)
 		{
 			//masked pix
 			outImData[i] = widget.previousData[i];
