@@ -21,6 +21,7 @@
 <script src="videoPlayerWidget.js"></script>
 <script src="colourFlattenWidget.js"></script>
 <script src="mixerWidget.js"></script>
+<script src="colourMapWidget.js"></script>
 </head>
 <body>
 	<div class="container">
@@ -46,6 +47,7 @@
 			  <button id="addStaccatoFilter" type = 'button'>Staccato Filter</button>
 			  <button id="addStaccatoTrails" type = 'button'>Staccato Trails</button>
 			  <button id="addColourFlatten" type = 'button'>Colour Flatten</button>
+			  <button id="addColourMap" type = 'button'>Colour Changer</button>
 			  <button id="addVideoOutput" type = 'button'>Video Output</button>
 			</ul>		
 		</div>
@@ -71,6 +73,7 @@
 	document.querySelector("#addVideoFile").onclick = function(){createWidget('videoPlayer');}
 	document.querySelector("#addColourFlatten").onclick = function(){createWidget('colourFlatten');}
 	document.querySelector("#addMultiInput").onclick = function(){createWidget('mixer');}
+	document.querySelector("#addColourMap").onclick = function(){createWidget('colourMap');}
 	
 	
 	function saveSettingsClick ()

@@ -4,7 +4,7 @@ function createWidget(type)
 		
 		switch(type) {
 			case 'webcam':
-				var widget = CreateCameraWidgetObj ();	
+				var widget = CreateCameraWidgetObj (type);	
 			break;
 			case 'colourFlatten':
 				var widget = CreateColourFlattenWidgetObj (type);	
@@ -13,30 +13,30 @@ function createWidget(type)
 				var widget = CreateMixerWidgetObj (type);
 			break
 			case 'chromaMask':
-				var widget = CreateChromaMaskWidgetObj ();
-				
+				var widget = CreateChromaMaskWidgetObj (type);
 			break;
 			case 'staccatoFilter':
-				var widget = CreateStaccatoFilterWidgetObj ();
+				var widget = CreateStaccatoFilterWidgetObj (type);
 			break;
 			case 'staccatoTrails':
 				var widget = CreateStaccatoTrailsWidgetObj (type);
 			break;
 			case 'videoOutput':
-				var widget = CreateVideoOutputWidgetObj ();
+				var widget = CreateVideoOutputWidgetObj (type);
 			break;
-			
 			case 'videoPlayer':
-				var widget = CreateVideoPlayerWidgetObj ();
+				var widget = CreateVideoPlayerWidgetObj (type);
 			break;
-			
 			case 'backroundMask':
-				var widget = CreateBackroundMaskWidgetObj ();
+				var widget = CreateBackroundMaskWidgetObj (type);
+			break;
+			case 'diffMask':
+				var widget = CreateDiffMaskWidgetObj (type);
+			break;
+			case 'colourMap':
+				var widget = CreateColourMapWidgetObj (type);
 			break;
 			
-			case 'diffMask':
-				var widget = CreateDiffMaskWidgetObj ();
-			break;
 		}	
 		widgets.push(widget);
 		
