@@ -1,5 +1,38 @@
 
 .widgetControls > *
 {
-	padding: 5px;
+	margin-right: 5px;
+	margin-top: 5px;
+}
+
+.widgetControls > label
+{
+	margin-right: 0px;
+	margin-left: 5px;
+}
+
+#controls  > ul > button
+{
+	margin-top: 5px;
+}
+
+.widget_group
+{
+	display: inline-block;
+	vertical-align: top;
+    margin: 10px;
+}
+
+.widget_group > div > button
+{
+	margin-top: 5px;
+	width: 100%;
+}
+
+h4
+{
+	width: 100%;
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }

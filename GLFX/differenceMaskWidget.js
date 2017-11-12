@@ -34,7 +34,7 @@ function CreateDiffMaskWidgetObj ()
 			newSelect.addEventListener("change", inputChange.bind(event, widget));
 		})
 		newLabel = document.createElement('label');
-		newLabel.innerHTML = 'Tolerance:';
+		newLabel.innerHTML = 'Tolerance: ';
 		controlsDiv.appendChild(newLabel);
 	
 		tolerance = document.createElement('input');
@@ -45,7 +45,7 @@ function CreateDiffMaskWidgetObj ()
 		tolerance.addEventListener("change", settingsChange.bind(event, widget));
 		
 		newLabel = document.createElement('label');
-		newLabel.innerHTML = 'Frames Between Samples:';
+		newLabel.innerHTML = 'Frames Between Samples: ';
 		controlsDiv.appendChild(newLabel);
 	
 		framesPerSample = document.createElement('input');

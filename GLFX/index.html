@@ -36,20 +36,38 @@
 				<input id="fileInput" type="file" name="files[]" style="display:none;"/>
 			  	<button id="loadSettings" type="button" onclick="loadSettingsClick();">Load Settings</button>
 			</ul>
-			<ul>
-			  Add wigdets:
-			  <button id="addWebcam" type="button" >Camera</button>
-			  <button id="addVideoFile" type="button" >Video Player</button>
-			  <button id="addMultiInput" type="button" >Widget Mixer</button>
-			  <button id="addChromaFilter" type = 'button'>Chroma Mask</button>
-			  <button id="addBkMask" type = 'button'>Backround Mask</button>
-			  <button id="addDiffMask" type = 'button'>Difference Mask</button>
-			  <button id="addStaccatoFilter" type = 'button'>Staccato Filter</button>
-			  <button id="addStaccatoTrails" type = 'button'>Staccato Trails</button>
-			  <button id="addColourFlatten" type = 'button'>Colour Flatten</button>
-			  <button id="addColourMap" type = 'button'>Colour Changer</button>
-			  <button id="addVideoOutput" type = 'button'>Video Output</button>
-			</ul>		
+			<div id="widget_creators">
+			  <div class="widget_group">
+				<h4>Inputs</h4>
+				<div><button id="addWebcam" type="button" >Camera</button></div>
+			    <div><button id="addVideoFile" type="button" >Video Player</button></div>
+			  </div>
+			  
+			  <div class="widget_group">
+			  	<h4>Mixers</h4>
+				<div><button id="addMultiInput" type="button" >Widget Mixer</button></div></div>
+			  
+			  <div class="widget_group">
+				<h4>Masks</h4>
+				<div><button id="addChromaFilter" type = 'button'>Chroma Mask</button></div>
+				<div><button id="addBkMask" type = 'button'>Backround Mask</button></div>
+				<div><button id="addDiffMask" type = 'button'>Difference Mask</button></div>
+			  </div>
+			  
+			  <div class="widget_group">
+				<h4>Filters</h4>
+				<div><button id="addStaccatoFilter" type = 'button'>Staccato Filter</button></div>
+				<div><button id="addStaccatoTrails" type = 'button'>Staccato Trails</button></div>
+				<div><button id="addColourFlatten" type = 'button'>Colour Flatten</button></div>
+				<div><button id="addColourMap" type = 'button'>Colour Changer</button></div>
+			  </div>
+			  
+			  <div class="widget_group">
+				<h4>Outputs</h4>
+				<div><button id="addVideoOutput" type = 'button'>Video Output</button></div>
+			  </div>
+			  
+			</div>	
 		</div>
 		<div id="main">
 			<!--this is where all the generated HTML goes -->
