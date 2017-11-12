@@ -95,6 +95,17 @@ function CreateColourMapWidgetObj (type)
 		widget.panelDom.appendChild(newCanvas);
 		widget.canvasDom = newCanvas;
 		
+		negativeButton = document.createElement('button');
+		negativeButton.innerHTML = 'Negative';
+		controlsDiv.appendChild(negativeButton);
+		negativeButton.addEventListener("click", negativeButtonClick.bind(event, widget));
+		
+		colourMapResetButton = document.createElement('button');
+		colourMapResetButton.innerHTML = 'Reset';
+		controlsDiv.appendChild(colourMapResetButton);
+		colourMapResetButton.addEventListener("click", resetButtonClick.bind(event, widget));
+		
+		
 		var draw = function (widget) {
 			if (widget.data.isActive != false )requestAnimationFrame(draw.bind(event, widget));
 			
@@ -113,6 +124,22 @@ function CreateColourMapWidgetObj (type)
 		widget.data.a = widget.alphaSelectDom.value;
 	}
 	return newWidget
+}
+
+function resetButtonClick(widget, event)
+{
+	widget.redSelectDom.value = 'R';
+	widget.greenSelectDom.value = 'G';
+	widget.blueSelectDom.value = 'B';
+	widget.changeMethod (widget);
+}
+
+function negativeButtonClick(widget, event)
+{
+	widget.redSelectDom.value = 'Inverse R';
+	widget.greenSelectDom.value = 'Inverse G';
+	widget.blueSelectDom.value = 'Inverse B';
+	widget.changeMethod (widget);
 }
 
 function addColourTypesToDropdown(newSelect)

@@ -86,7 +86,7 @@ function addAccordionSegment(parentElement, widget)
 	newInput.value = widget.data.label;
 	newInput.addEventListener('change', widget.updateLabel.bind(event, widget), false);
 	newInput.addEventListener('keyup', keyupWidgetLabel) 
-	newInput.addEventListener('click', function(event){event.stopPropagation()})
+	//newInput.addEventListener('click', function(event){event.stopPropagation()})
 	
 	newCloseButton = document.createElement('div');
 	newCloseButton.className  = "closeButton";
