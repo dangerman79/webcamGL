@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="accordion.css">
+<link rel="stylesheet" href="GLFX.css">
+<link rel="icon" href="favicon.ico" type="image/png" sizes="32x32">
+
+
+<script src="generalFunctions.js"></script>
+<script src="dataObjs.js"></script>
+<script src="accordion.js"></script>
+<script src="fileIO.js"></script>
+<script src="widgets.js"></script>
+<script src="cameraWidget.js"></script>
+<script src="chromaMaskWidget.js"></script>
+<script src="backgroundMaskWidget.js"></script>
+<script src="videoOutWidget.js"></script>
+<script src="staccatoFilterWidget.js"></script>
+<script src="staccatoTrailsWidget.js"></script>
+<script src="differenceMaskWidget.js"></script>
+<script src="videoPlayerWidget.js"></script>
+<script src="alphaVidWidget.js"></script>
+<script src="colourFlattenWidget.js"></script>
+<script src="mixerWidget.js"></script>
+</head>
+<body>
+	<div class="container">
+		<header>
+			<h2>GLFX</h2>
+			<p>Video FX, in your Browser</p>
+		</header>
+		<div id="controls">
+			Project name: <input type="text" id="projName" value="New Project"><br>
+			<ul>
+				<button id="saveSettings" type="button" onclick="saveSettingsClick();">Save Settings</button>
+				<input id="fileInput" type="file" name="files[]" style="display:none;"/>
+			  	<button id="loadSettings" type="button" onclick="loadSettingsClick();">Load Settings</button>
+			</ul>
+			<ul>
+			  Add wigdets:
+			  <button id="addWebcam" type="button" >Camera</button>
+			  <button id="addVideoFile" type="button" >Video Player</button>
+			  <button id="addMultiInput" type="button" >Widget Mixer</button>
+			  <button id="addChromaFilter" type = 'button'>Chroma Mask</button>
+			  <button id="addBkMask" type = 'button'>Backround Mask</button>
+			  <button id="addDiffMask" type = 'button'>Difference Mask</button>
+			  <button id="addStaccatoFilter" type = 'button'>Staccato Filter</button>
+			  <button id="addStaccatoTrails" type = 'button'>Staccato Trails</button>
+			  <button id="addColourFlatten" type = 'button'>Colour Flatten</button>
+			  <button id="addVideoOutput" type = 'button'>Video Output</button>
+              <button id="addAlphaVid" type = 'button'>Alpha Vid Output</button>
+			</ul>		
+		</div>
+		<div id="main">
+			<!--this is where all the generated HTML goes -->
+		</div>
+	</div>
+</body>
+
+
+<script>
+	navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia;
+	
+	
+	mainDomElement = document.querySelector("#main");
+	document.querySelector("#addWebcam").onclick = function(){createWidget('webcam');}
+	document.querySelector("#addChromaFilter").onclick = function(){createWidget('chromaMask');}
+	document.querySelector("#addStaccatoFilter").onclick = function(){createWidget('staccatoFilter');}
+	document.querySelector("#addStaccatoTrails").onclick = function(){createWidget('staccatoTrails');}
+	document.querySelector("#addVideoOutput").onclick = function(){createWidget('videoOutput');}
+	document.querySelector("#addBkMask").onclick = function(){createWidget('backroundMask');}
+	document.querySelector("#addDiffMask").onclick = function(){createWidget('diffMask');}
+	document.querySelector("#addVideoFile").onclick = function(){createWidget('videoPlayer');}
+	document.querySelector("#addColourFlatten").onclick = function(){createWidget('colourFlatten');}
+	document.querySelector("#addMultiInput").onclick = function(){createWidget('mixer');}
+    
+	document.querySelector("#addAlphaVid").onclick = function(){createWidget('alphaVid');}	
+	
+	function saveSettingsClick ()
+	{
+		var projName = document.querySelector("#projName").value
+		projectName = projName;
+		saveSettingsToFile(projName);
+
+	}
+	
+	function loadSettingsClick()
+	{
+		
+		fileInputDlg = document.getElementById('fileInput');
+		fileInputDlg.click();
+	}
+	document.getElementById('fileInput').addEventListener('change', loadSettingsFile, false);
+	
+
+</script>
+
+
+</html>
